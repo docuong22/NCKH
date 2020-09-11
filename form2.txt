@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+using System.Drawing.Drawing2D;
+using System.Windows.Media;
+
+namespace LamDemoChoSucVat
+{
+    public partial class Form2 : Form
+    {
+        public Form2()
+        {
+            InitializeComponent();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Open File";
+            openFileDialog.Filter = "Text Files(*txt)|*.txt";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader read = new StreamReader(File.OpenRead(openFileDialog.FileName));
+                richTextBox1.Text = read.ReadToEnd();
+                read.Dispose();
+            }
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.Title = "Save File";
+            save.Filter = "Save Files (*.txt)|*.txt";
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader read = new StreamReader(File.Create(save.FileName));
+                richTextBox1.Text = read.ReadToEnd();
+                read.Dispose();
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.SetVisibleCore(false);
+            Form1 frm1 = new Form1();
+            frm1.Show();
+        }
+
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Font myfont = new Font("Tahoma", 14.0f);
+            richTextBox1.Font = myfont;
+        }
+
+        private void colorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.ForeColor = System.Drawing.Color.Red;
+        }
+    }
+}
