@@ -1,0 +1,11 @@
+conda env create -f environment-gpu.yml
+activate car-behavioral-cloning
+python model.py => sinh ra cac file h5 moi
+*model.py(change)
+data_df = pd.read_csv(os.path.join(args.data_dir, r"C:\Users\ACER\car-behavioral-cloning\driving_log.csv"))
+
+*utils.py(change)
+np.where((ym - y1) * (x2 - x1) - (y2 - y1) * (xm - x1) > 0)
+
+
+python drive.py model.h5
